@@ -57,3 +57,9 @@ $ iasync sync --allow-delete ~/Music co.brushedtype.doppler-ios
 iasync is provided under the BSD 3-Clause license. For more information, please see the LICENSE file.
 
 Multiple functions (`idevfs_canonpath()` and `idevfs_mkpath()`) use code from [NetBSD]. These licenses are included in the NOTICES file.
+
+[libimobiledevice]: https://libimobiledevice.org/
+[libbsd]: https://libbsd.freedesktop.org/wiki/
+[meson]: https://mesonbuild.com/
+[ninja]: https://ninja-build.org/
+[NetBSD]: https://www.netbsd.org
