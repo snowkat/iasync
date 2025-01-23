@@ -1,0 +1,124 @@
+.Dd January 22, 2025
+.Dt IASYNC 1
+.Os
+.Sh NAME
+.Nm iasync
+.Nd sync files to iOS app folders
+.Sh SYNOPSIS
+.Nm iasync
+.Op Ar options
+.Ar command
+.Op Ar command_options
+.Nm
+.Ar lsdevs
+.Op command_options
+.Nm
+.Ar lsapps
+.Op command_options
+.Nm
+.Ar ls
+.Op command_options
+.Nm
+.Ar sync
+.Op command_options
+.Ar source
+.Ar target
+.Sh DESCRIPTION
+.Nm
+syncs files to Documents folders for iOS apps that support file sharing.
+.Ss Global Options
+The following options largely affect all commands, and should be provided before
+the command name.
+.Bl -tag -width XXXX
+.It Fl n, -name Ar name
+.It Fl u, -udid Ar udid
+Connect to the device with the provided name or UDID. This can be discovered
+with the
+.Ar lsdevs
+command if the device is already connected.
+.It Fl v, -verbose
+Increases the verbosity. This can be used multiple times. This is mutally exclusive with
+.Ns Fl -quiet .
+.It Fl q, -quiet
+Lowers the verbosity. This is mutually exclusive with
+.Ns Fl -verbose .
+.El
+.Ss Commands
+.Bl -tag
+.It Xo
+.Nm
+.Ic lsdevs
+.Op Fl n | -no-headers
+.Xc
+Lists devices connected to the computer as a table. For each connected device,
+this shows the name, whether it's connected over USB or Network (Wi-Fi), and its
+UDID.
+.Bl -tag
+.It Fl n, -no-headers
+Suppress the table headers.
+.El
+.It Xo
+.Nm
+.Ic lsapps
+.Op Fl n | -no-headers
+.Xc
+Lists apps that support file sharing for the connected device. 
+.Bl -tag
+.It Fl n, -no-headers
+Suppress the table headers.
+.El
+.It Xo
+.Nm
+.Ic ls
+.Op Fl a | -all
+.Ar app_id Ns Op Ar :path
+.Xc
+Lists all files in the directory provided by the
+.Ar path
+argument, relative to the root of the app's Documents folder.
+.Bl -tag
+.It Fl a, -all
+Display entries with names starting with a dot (`.').
+.El
+.It Xo
+.Nm
+.Ic sync
+.Op Fl Dnp
+.Ar source
+.Ar app_id Ns Op Ar :path
+.Xc
+Copies the files from the
+.Ar source
+directory to the path provided by the
+.Ar app_id
+and
+.Ar path
+arguments.
+.Bl -tag
+.It Fl D, -allow-delete
+Allow the sync operation to delete remote files to ensure the remote directory
+tree matches the local tree.
+.It Fl n, -dry-run
+Explain what would have been done, instead of performing the operations.
+.It Fl p, -progress
+Print progress information for files being copied.
+.El
+.El
+.Sh EXIT STATUS
+.Nm
+exits with either 1 or 2 if an error occurred.
+.Sh SEE ALSO
+.Xr ifuse 1 ,
+.Xr idevicepair 1
+.Sh BUGS
+.Nm
+is still heavily in development, and bugs are to be expected. While efforts are
+made to avoid loss of data, users should ensure their files are backed up before
+performing a sync if they have any important data that could be lost.
+.Pp
+Bugs can be reported on GitHub at:
+.Pp
+.D1 Lk https://github.com/snowkat/iasync
+.Pp
+or by sending an e-mail to
+.Ns Mt snow@datagirl.xyz .

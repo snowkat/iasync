@@ -1,0 +1,7 @@
+---
+BasedOnStyle: Mozilla
+AlignAfterOpenBracket: Align
+AlignArrayOfStructures: Left
+AlwaysBreakAfterDefinitionReturnType: All
+IndentWidth: 4
+IndentCaseLabels: false
